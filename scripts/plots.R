@@ -98,12 +98,14 @@ ggplot(legume_m, aes(x=Strain, y=weight, na.rm=TRUE)) +
        title="Plant")
 
 #-----
+# Plant growth versus strain type
+
 ggplot(filter(legume_m, Strain=="1174"), aes(x=Plant, y=weight)) +
   geom_point()
 
 ggplot(filter(legume_m, Strain=="1075"), aes(x=Plant, y=weight)) +
   geom_point(na.rm=TRUE)
-
+##- Ty
 ggplot(filter(legume_m, Strain=="1075"), aes(x=Plant, y=weight, color=Plant)) +
   geom_boxplot(na.rm=TRUE)
 
@@ -117,3 +119,15 @@ ggplot(legume_m, aes(Plant, y=weight)) +
     legend.position = "bottom") +   # w/out this, all strains show on x
   labs(y="Weight",
        title="Strain")
+
+ggplot(legume_m, aes(Plant, y=weight)) +
+  geom_point(aes(fill=Plant), na.rm=TRUE) +
+  facet_wrap(~Strain) +
+  theme(
+    axis.ticks.x = element_blank(),    # allows the x labels to be removed
+    axis.text.x = element_blank(),
+    axis.title = element_blank(),
+    legend.position = "bottom") +   # w/out this, all strains show on x
+  labs(y="Weight",
+       title="Strain")
+## For geom_point(), this does not produce colors - need to rethink
