@@ -73,5 +73,26 @@ ggplot(filter(legume_m, Plant == "Oe"), aes(x=Strain, y=weight, na.rm=TRUE)) +
   labs(y="Weight",
        title="Plant Oe")
 
+##Boxplot with color for Oe
+# Ref https://stackoverflow.com/questions/14604439/plot-multiple-boxplot-in-one-graph
 
-
+ggplot(filter(legume_m, Plant == "Oe"), aes(x=Strain, y=weight, na.rm=TRUE)) +
+  geom_boxplot(aes(fill=Strain), na.rm=TRUE) +
+  labs(y="Weight",
+       title="Plant Oe")
+# Comment - color really makes things stand out
+# For comparative purposes, plotting each plant separately is probably not useful
+#
+# Much better to plot the full data out by plant to allow full comparison of the data
+# set
+#
+ggplot(legume_m, aes(x=Strain, y=weight, na.rm=TRUE)) +
+  geom_boxplot(aes(fill=Strain), na.rm=TRUE) +
+  facet_wrap(~Plant) + 
+  theme(
+        axis.ticks.x = element_blank(),    # allows the x labels to be removed
+        axis.text.x = element_blank(),
+        axis.title = element_blank(),
+        legend.position = "bottom") +   # w/out this, all strains show on x
+  labs(y="Weight",
+       title="Plant")
