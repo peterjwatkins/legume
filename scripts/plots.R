@@ -96,3 +96,24 @@ ggplot(legume_m, aes(x=Strain, y=weight, na.rm=TRUE)) +
         legend.position = "bottom") +   # w/out this, all strains show on x
   labs(y="Weight",
        title="Plant")
+
+#-----
+ggplot(filter(legume_m, Strain=="1174"), aes(x=Plant, y=weight)) +
+  geom_point()
+
+ggplot(filter(legume_m, Strain=="1075"), aes(x=Plant, y=weight)) +
+  geom_point(na.rm=TRUE)
+
+ggplot(filter(legume_m, Strain=="1075"), aes(x=Plant, y=weight, color=Plant)) +
+  geom_boxplot(na.rm=TRUE)
+
+ggplot(legume_m, aes(Plant, y=weight)) +
+  geom_boxplot(aes(fill=Plant), na.rm=TRUE) +
+  facet_wrap(~Strain) +
+  theme(
+    axis.ticks.x = element_blank(),    # allows the x labels to be removed
+    axis.text.x = element_blank(),
+    axis.title = element_blank(),
+    legend.position = "bottom") +   # w/out this, all strains show on x
+  labs(y="Weight",
+       title="Strain")
